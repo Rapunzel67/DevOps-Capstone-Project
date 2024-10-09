@@ -40,5 +40,5 @@ jobs:
           port: 42006
           connect_timeout: 10s
           first_ssh: |
-            sudo kubectl run podact_th --image ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.imagename }}:latest
+            sudo kubectl run podact-th --image ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.imagename }}:latest
     
