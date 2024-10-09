@@ -5,7 +5,7 @@ on:
 jobs:
   build_and_deploy:
     env:
-      imagename: 'actionsimage'
+      imagename: 'actionsimg_th'
     runs-on: ubuntu-latest
     steps:
       - name: clone code
@@ -31,4 +31,14 @@ jobs:
           context: .
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/${{env.imagename}}:latest
+      - name: Connect to the Lab and deploy a pod
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        with:
+          host: 'mittalsonal04gmsl0034.simplilearnlabs.com'
+          user: 'mittalsonal04gm'
+          pass: 'al04gm0A@4vafq'
+          port: 42006
+          connect_timeout: 10s
+          first_ssh: |
+            sudo kubectl run podaction --image ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.imagename }}:latest
     
