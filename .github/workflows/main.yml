@@ -1,0 +1,19 @@
+name: cicd workflow
+on:
+  push:
+    branches: master
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone code
+        uses: actions/checkout@v4
+      - name: download Java and Maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+          cache: 'maven'
+      - name: build code
+        run: mvn package
+        
